@@ -8,6 +8,21 @@ describe("Attribute builder", () => {
     });
 });
 
+describe("Opening tag builder", () => {
+    it("self-closing, no attributes", () => {
+        expect(templater.openingTag("meta", {})).toBe("<meta/>");
+    });
+    it("self-closing, with attributes", () => {
+        expect(templater.openingTag("img", attributes)).toBe(`<img ${attributeString}/>`);
+    });
+    it("not self-closing, no attributes", () => {
+        expect(templater.openingTag("div", {})).toBe("<div>");
+    });
+    it("not self-closing, with attributes", () => {
+        expect(templater.openingTag("span", attributes)).toBe(`<span ${attributeString}>`);
+    });
+});
+
 const attributes = {
     htmlClass: "warning big-button",
     id: "my-button",

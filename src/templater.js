@@ -9,7 +9,8 @@ function elementBuilder(name, attributes, content) {
 }
 
 function openingTag(name, attributes) {
-    const combined = `${name} `
+    const combined = `${name} ${attributeBuilder(attributes)}`.trim();
+    return `<${combined}${selfClosing.includes(name) ? "/>" : ">"}`;
 }
 
 function closingTag(name) {
