@@ -9,12 +9,6 @@ describe("Attribute builder", () => {
 });
 
 describe("Opening tag builder", () => {
-    it("self-closing, no attributes", () => {
-        expect(templater.openingTag("meta", {})).toBe("<meta/>");
-    });
-    it("self-closing, with attributes", () => {
-        expect(templater.openingTag("img", attributes)).toBe(`<img ${attributeString}/>`);
-    });
     it("not self-closing, no attributes", () => {
         expect(templater.openingTag("div", {})).toBe("<div>");
     });
@@ -22,6 +16,21 @@ describe("Opening tag builder", () => {
         expect(templater.openingTag("span", attributes)).toBe(`<span ${attributeString}>`);
     });
 });
+
+describe("Closing tag builder", () => {
+    it("closes a non-self-closing tag", () => {
+        expect(templater.closingTag("div")).toBe("</div>");
+    })
+});
+
+describe("Self-closing tag builder", () => {
+    it("closes without attributes", () => {
+        expect(templater.selfClosingTag("meta", {})).toBe("<meta/>");
+    })
+    it("closes with attributes", () => {
+        expect(templater.selfClosingTag("img", attributes)).toBe(`<img ${attributeString}/>`);
+    })
+})
 
 const attributes = {
     htmlClass: "warning big-button",

@@ -1,20 +1,25 @@
 "use strict";
 
-function elementBuilder(name, attributes, content) {
-    return `
-    ${openingTag(name, attributes)}
-    ${content}
-    ${closingTag(name)}
-    `;
+function elementBuilder(name, attributes = {}, content = '') {
+    if(selfClosing.includes(name)) {
+        return selfClosingTag(name, attributes);
+    } else {
+        return `${openingTag(name, attributes)}${content}${closingTag(name)}`;
+    }
 }
 
 function openingTag(name, attributes) {
     const combined = `${name} ${attributeBuilder(attributes)}`.trim();
-    return `<${combined}${selfClosing.includes(name) ? "/>" : ">"}`;
+    return `<${combined}>`;
 }
 
 function closingTag(name) {
+    return `</${name}>`;
+}
 
+function selfClosingTag(name, attributes) {
+    const combined = `${name} ${attributeBuilder(attributes)}`.trim();
+    return `<${combined}/>`;
 }
 
 function attributeBuilder(attributes) {
@@ -34,5 +39,5 @@ function keywordResolver(key) {
 }
 
 module.exports = {
-    elementBuilder, openingTag, closingTag, attributeBuilder
+    elementBuilder, openingTag, closingTag, attributeBuilder, selfClosingTag
 };
