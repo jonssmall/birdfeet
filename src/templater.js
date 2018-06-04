@@ -4,7 +4,7 @@ function elementBuilder(name, attributes = {}, ...content) {
     if(selfClosing.includes(name)) {
         return selfClosingTag(name, attributes);
     } else {
-        return `${openingTag(name, attributes)}${content.join('')}${closingTag(name)}`;
+        return `${openingTag(name, attributes)}${content.join("")}${closingTag(name)}`;
     }
 }
 
@@ -24,7 +24,7 @@ function selfClosingTag(name, attributes) {
 
 function attributeBuilder(attributes) {
     return Object.keys(attributes).map(a => {
-        const key = reservedKeywords.includes(a) ?  keywordResolver(a) : a;
+        const key = reservedKeywords.includes(a) ? keywordResolver(a) : a;
         return `${key}="${attributes[a]}"`;
     }).join(" ");
 }
@@ -42,7 +42,7 @@ const templater = {
     elementBuilder, openingTag, closingTag, attributeBuilder, selfClosingTag
 };
 
-if (typeof module !== 'undefined' && typeof module.exports !== 'undefined') {
+if (typeof module !== "undefined" && typeof module.exports !== "undefined") {
     module.exports = templater;
 } else {
     window.templater = templater;
