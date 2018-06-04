@@ -42,8 +42,10 @@ const templater = {
     elementBuilder, openingTag, closingTag, attributeBuilder, selfClosingTag
 };
 
-if (typeof module !== "undefined" && typeof module.exports !== "undefined") {
-    module.exports = templater;
-} else {
-    window.templater = templater;
-}
+// if (typeof module !== "undefined" && typeof module.exports !== "undefined") {
+//     module.exports = templater;
+// } else {
+//     window.templater = templater;
+// }
+
+export default templater;

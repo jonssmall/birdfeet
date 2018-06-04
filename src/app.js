@@ -1,3 +1,6 @@
+import templater from './templater';
+import { setTimeout } from 'timers';
+
 document.addEventListener("DOMContentLoaded", () => {
     document.querySelector("#app").innerHTML = makeContent();
 });
@@ -17,5 +20,9 @@ function div(attributes, ...content) {
 }
 
 function testClick() {
+    debugger;
+    console.log(this);
     alert("hello");
 }
+
+setTimeout(() => testClick(), 1000);
