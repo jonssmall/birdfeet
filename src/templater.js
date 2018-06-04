@@ -1,10 +1,10 @@
 "use strict";
 
-function elementBuilder(name, attributes = {}, content = '') {
+function elementBuilder(name, attributes = {}, ...content) {
     if(selfClosing.includes(name)) {
         return selfClosingTag(name, attributes);
     } else {
-        return `${openingTag(name, attributes)}${content}${closingTag(name)}`;
+        return `${openingTag(name, attributes)}${content.join('')}${closingTag(name)}`;
     }
 }
 
@@ -38,6 +38,12 @@ function keywordResolver(key) {
     return key.replace("html", "").toLowerCase();
 }
 
-module.exports = {
+const templater = {
     elementBuilder, openingTag, closingTag, attributeBuilder, selfClosingTag
 };
+
+if (typeof module !== 'undefined' && typeof module.exports !== 'undefined') {
+    module.exports = templater;
+} else {
+    window.templater = templater;
+}
