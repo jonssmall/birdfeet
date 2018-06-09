@@ -30,13 +30,6 @@ describe("Element builder", () => {
     });
 });
 
-// describe("Attribute builder", () => {
-//     it("transforms a JS object into an html5 attribute string, applied to an element", () => {
-//         expect(templater.attributeBuilder(attributes))
-//             .toBe(attributeString);
-//     });
-// });
-
 const attributes = {
     htmlClass: "warning big-button",
     id: "my-button",

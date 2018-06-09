@@ -1,6 +1,6 @@
 'use strict';
 
-function elementBuilder(name, attributes = {}, ...content) {
+function elementBuilder(name, attributes, ...content) {
     const template = document.createElement('template');
     const element = document.createElement(name);
 
@@ -23,10 +23,6 @@ function setAttributes(element, attributes) {
     });
     return element;
 }
-
-
-const selfClosing = ["area", "base", "br", "col", "embed", "hr", "img", "input", 
-    "keygen", "link", "menuitem", "meta", "param", "source", "track", "wbr"];
 
 const reservedKeywords = ["htmlClass", "htmlFor"];
 
