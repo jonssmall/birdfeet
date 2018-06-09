@@ -1,6 +1,6 @@
 'use strict';
 
-function elementBuilder(name, attributes, ...content) {
+function elementBuilder({name, attributes = {}, content = []}) {
     const template = document.createElement('template');
     const element = document.createElement(name);
 
