@@ -1,33 +1,29 @@
-"use strict";
+'use strict';
 
 function elementBuilder(name, attributes = {}, ...content) {
-    if(selfClosing.includes(name)) {
-        return selfClosingTag(name, attributes);
-    } else {
-        return `${openingTag(name, attributes)}${content.join("")}${closingTag(name)}`;
-    }
+    const template = document.createElement('template');
+    const element = document.createElement(name);
+
+    content.forEach(c => {
+        if(typeof c === 'string') {
+            element.appendChild(document.createTextNode(c));
+        } else {
+            element.appendChild(c);
+        }
+    });
+
+    template.appendChild(setAttributes(element, attributes));
+    return template.firstChild;
 }
 
-function openingTag(name, attributes) {
-    const combined = `${name} ${attributeBuilder(attributes)}`.trim();
-    return `<${combined}>`;
-}
-
-function closingTag(name) {
-    return `</${name}>`;
-}
-
-function selfClosingTag(name, attributes) {
-    const combined = `${name} ${attributeBuilder(attributes)}`.trim();
-    return `<${combined}/>`;
-}
-
-function attributeBuilder(attributes) {
-    return Object.keys(attributes).map(a => {
+function setAttributes(element, attributes) {
+    Object.keys(attributes).forEach(a => {
         const key = reservedKeywords.includes(a) ? keywordResolver(a) : a;
-        return `${key}="${attributes[a]}"`;
-    }).join(" ");
+        element.setAttribute(key, attributes[a]);
+    });
+    return element;
 }
+
 
 const selfClosing = ["area", "base", "br", "col", "embed", "hr", "img", "input", 
     "keygen", "link", "menuitem", "meta", "param", "source", "track", "wbr"];
@@ -39,7 +35,7 @@ function keywordResolver(key) {
 }
 
 const templater = {
-    elementBuilder, openingTag, closingTag, attributeBuilder, selfClosingTag
+    elementBuilder
 };
 
 if (typeof module !== "undefined" && typeof module.exports !== "undefined") {
