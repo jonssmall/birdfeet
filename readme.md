@@ -1,1 +1,1 @@
-minimalist html templating
+Minimalist HTML Templating
